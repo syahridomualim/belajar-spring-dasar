@@ -1,4 +1,10 @@
 package mualimsyahrido.spring.core
 
-class ScanConfigration {
+import org.springframework.context.annotation.ComponentScan
+import org.springframework.context.annotation.Configuration
+
+@Configuration
+@ComponentScan(basePackages = ["mualimsyahrido.spring.core.configuration"])
+class ScanConfiguration {
+
 }

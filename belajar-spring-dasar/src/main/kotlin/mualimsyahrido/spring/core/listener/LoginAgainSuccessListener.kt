@@ -6,8 +6,8 @@ import org.springframework.context.ApplicationListener
 import org.springframework.stereotype.Component
 
 @Component
-class LoginSuccessListener : ApplicationListener<LoginSuccessEvent>{
+class LoginAgainSuccessListener : ApplicationListener<LoginSuccessEvent> {
     override fun onApplicationEvent(event: LoginSuccessEvent) {
-        Log.log.info("Success login for user ${event.user}")
+        Log.log.info("login success again for user ${event.user}")
     }
 }

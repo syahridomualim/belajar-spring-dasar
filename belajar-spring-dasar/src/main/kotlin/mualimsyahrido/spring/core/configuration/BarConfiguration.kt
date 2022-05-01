@@ -1,4 +1,4 @@
-package mualimsyahrido.spring.core
+package mualimsyahrido.spring.core.configuration
 
 import mualimsyahrido.spring.core.data.Bar
 import org.springframework.context.annotation.Bean

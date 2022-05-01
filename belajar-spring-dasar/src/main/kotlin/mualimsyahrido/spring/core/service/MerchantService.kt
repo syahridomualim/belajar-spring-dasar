@@ -1,4 +1,4 @@
 package mualimsyahrido.spring.core.service
 
-class MerchantService {
+interface MerchantService {
 }

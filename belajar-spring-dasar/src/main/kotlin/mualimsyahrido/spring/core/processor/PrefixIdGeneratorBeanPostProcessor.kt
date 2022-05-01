@@ -4,15 +4,16 @@ import mualimsyahrido.spring.core.Log
 import mualimsyahrido.spring.core.aware.IdAware
 import org.springframework.beans.factory.config.BeanPostProcessor
 import org.springframework.core.Ordered
-import java.util.*
+import org.springframework.stereotype.Component
 
-class IdGeneratorBeanPostProcessor : BeanPostProcessor, Ordered {
-    override fun postProcessAfterInitialization(bean: Any, beanName: String): Any? {
-        Log.log.info("Id Generator Processor for Bean $beanName")
+@Component
+class PrefixIdGeneratorBeanPostProcessor : BeanPostProcessor, Ordered {
+    override fun postProcessAfterInitialization(bean: Any, beanName: String): Any {
+        Log.log.info("Prefix Id Generator Processor for Bean $beanName")
         if (bean is IdAware) {
-            Log.log.info("Set Id Generator Processor for Bean $beanName")
+            Log.log.info("Prefix Set Id Generator Processor for Bean $beanName")
             val idAware: IdAware = bean
-            idAware.setUserId("PZN- ${UUID.randomUUID().toString()}")
+            idAware.setUserId("PZN-" + idAware.getUserId())
         }
         return bean
     }

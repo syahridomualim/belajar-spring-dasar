@@ -1,4 +1,6 @@
 package mualimsyahrido.spring.core.event
 
-class LoginSuccesEvent {
-}
+import mualimsyahrido.spring.core.data.User
+import org.springframework.context.ApplicationEvent
+
+data class LoginSuccessEvent(val user: User) : ApplicationEvent(user)
