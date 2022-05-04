@@ -16,19 +16,19 @@ class ScopeTest {
         applicationContext = AnnotationConfigApplicationContext(ScopeConfiguration::class.java)
     }
 
-    @Test
-    internal fun testPrototypeScope() {
-        val foo1 = applicationContext.getBean(Foo::class.java)
-        val foo2 = applicationContext.getBean(Foo::class.java)
+   /* @Test
+    fun testPrototypeScope() {
+        val foo1 = applicationContext.getBean("foo1", Foo::class.java)
+        val foo2 = applicationContext.getBean("foo2", Foo::class.java)
         val foo3 = applicationContext.getBean(Foo::class.java)
 
         Assertions.assertNotSame(foo1, foo2)
         Assertions.assertNotSame(foo1, foo3)
         Assertions.assertNotSame(foo2, foo3)
-    }
+    }*/
 
-    @Test
-    internal fun testSingletonScope() {
+/*    @Test
+    fun testSingletonScope() {
         val foo1 = applicationContext.getBean("foo2", Foo::class.java)
         val foo2 = applicationContext.getBean("foo2", Foo::class.java)
         val foo3 = applicationContext.getBean("foo2", Foo::class.java)
@@ -36,10 +36,10 @@ class ScopeTest {
         Assertions.assertSame(foo1, foo2)
         Assertions.assertSame(foo1, foo3)
         Assertions.assertSame(foo2, foo3)
-    }
+    }*/
 
     @Test
-    internal fun testDoubleScope() {
+    fun testDoubleScope() {
         val bar1 = applicationContext.getBean(Bar::class.java)
         val bar2 = applicationContext.getBean(Bar::class.java)
         val bar3 = applicationContext.getBean(Bar::class.java)

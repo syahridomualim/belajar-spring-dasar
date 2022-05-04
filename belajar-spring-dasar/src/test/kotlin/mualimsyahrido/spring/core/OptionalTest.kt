@@ -19,12 +19,12 @@ class OptionalTest {
         applicationContext.registerShutdownHook()
     }
 
-    @Test
-    fun testOptional() {
-        val foo = applicationContext.getBean(Foo::class.java)
-        val fooBar = applicationContext.getBean(FooBar::class.java)
-
-        Assertions.assertNull(fooBar.bar)
-        Assertions.assertSame(fooBar.foo, foo)
-    }
+//    @Test
+//    fun testOptional() {
+//        val foo = applicationContext.getBean(Foo::class.java)
+//        val fooBar = applicationContext.getBean(FooBar::class.java)
+//
+//        Assertions.assertNull(fooBar.bar)
+//        Assertions.assertSame(fooBar.foo, foo)
+//    }
 }
