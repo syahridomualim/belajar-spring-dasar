@@ -8,7 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.core.env.Environment
 
 @SpringBootTest(classes = [ApplicationPropertiesTest.Companion.TestApplication::class])
-class ApplicationPropertiesTest(@Autowired val environment: Environment) {
+class ApplicationPropertiesTest (@Autowired val environment: Environment){
 
     @Test
     fun testApplicationProperties() {
@@ -17,9 +17,9 @@ class ApplicationPropertiesTest(@Autowired val environment: Environment) {
     }
 
     companion object {
+
         @SpringBootApplication
         class TestApplication {
-
         }
     }
 }

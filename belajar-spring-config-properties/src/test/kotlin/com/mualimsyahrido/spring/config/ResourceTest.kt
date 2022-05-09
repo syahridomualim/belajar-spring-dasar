@@ -3,7 +3,6 @@ package com.mualimsyahrido.spring.config
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import org.springframework.core.io.ClassPathResource
-import java.io.IOException
 
 class ResourceTest {
     @Test

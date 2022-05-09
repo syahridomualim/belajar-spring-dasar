@@ -1,4 +1,4 @@
-package com.mualimsyahrido.spring.config.propertysource
+package com.mualimsyahrido.spring.config.testpropertysource
 
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
@@ -8,7 +8,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.context.annotation.PropertySource
 import org.springframework.stereotype.Component
+import org.springframework.test.context.TestPropertySource
 
+@TestPropertySource(value = ["classpath:/sample.properties"])
 @SpringBootTest(classes = [PropertySourceTest.Companion.TestApplication::class])
 class PropertySourceTest(@Autowired val sampleProperties: TestApplication.SampleProperties) {
 
@@ -20,7 +22,7 @@ class PropertySourceTest(@Autowired val sampleProperties: TestApplication.Sample
 
     companion object {
         @SpringBootApplication
-        @PropertySource(value = ["classpath:/sample.properties"])
+//        @PropertySource(value = ["classpath:/sample.properties"])
         class TestApplication {
 
             @Component
