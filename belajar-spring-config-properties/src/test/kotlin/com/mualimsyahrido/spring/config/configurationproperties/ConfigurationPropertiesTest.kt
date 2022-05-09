@@ -26,7 +26,27 @@ class ConfigurationPropertiesTest(@Autowired val applicationProperties: Applicat
         Assertions.assertEquals("jdbc://url", applicationProperties.databaseProperties.url)
     }
 
+    @Test
+    fun testCollection() {
+        Assertions.assertEquals(listOf("customers", "products", "categories"), applicationProperties.databaseProperties.whiteListTables)
+        Assertions.assertEquals(100, applicationProperties.databaseProperties.maxTableSize["products"])
+        Assertions.assertEquals(100, applicationProperties.databaseProperties.maxTableSize["customers"])
+        Assertions.assertEquals(100, applicationProperties.databaseProperties.maxTableSize["categories"])
+    }
 
+    @Test
+    fun testEmbeddedCollection() {
+        Assertions.assertEquals("default", applicationProperties.defaultRoles[0].id)
+        Assertions.assertEquals("Default Role", applicationProperties.defaultRoles[0].name)
+        Assertions.assertEquals("guest", applicationProperties.defaultRoles[1].id)
+        Assertions.assertEquals("Guest Role", applicationProperties.defaultRoles[1].name)
+
+        Assertions.assertEquals("admin", applicationProperties.roles["admin"]?.id)
+        Assertions.assertEquals("Admin Role", applicationProperties.roles["Admin Role"]?.name)
+        Assertions.assertEquals("finance", applicationProperties.roles["finance"]?.id)
+        Assertions.assertEquals("Finance Role", applicationProperties.roles["Finance Role"]?.name)
+
+    }
 
     companion object {
         @SpringBootApplication
