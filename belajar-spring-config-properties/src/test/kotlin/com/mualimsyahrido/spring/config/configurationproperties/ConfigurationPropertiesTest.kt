@@ -30,34 +30,34 @@ class ConfigurationPropertiesTest(
 
     @Test
     fun testDatabaseProperties() {
-        Assertions.assertEquals("mualim", applicationProperties.databaseProperties.username)
-        Assertions.assertEquals("rahasia", applicationProperties.databaseProperties.password)
-        Assertions.assertEquals("database", applicationProperties.databaseProperties.name)
-        Assertions.assertEquals("jdbc://url", applicationProperties.databaseProperties.url)
+        Assertions.assertEquals("mualim", applicationProperties.databaseProperties?.username)
+        Assertions.assertEquals("rahasia", applicationProperties.databaseProperties?.password)
+        Assertions.assertEquals("database", applicationProperties.databaseProperties?.name)
+        Assertions.assertEquals("jdbc://url", applicationProperties.databaseProperties?.url)
     }
 
     @Test
     fun testCollection() {
         Assertions.assertEquals(
             listOf("customers", "products", "categories"),
-            applicationProperties.databaseProperties.whiteListTables
+            applicationProperties.databaseProperties?.whiteListTables
         )
-        Assertions.assertEquals(100, applicationProperties.databaseProperties.maxTableSize["products"])
-        Assertions.assertEquals(100, applicationProperties.databaseProperties.maxTableSize["customers"])
-        Assertions.assertEquals(100, applicationProperties.databaseProperties.maxTableSize["categories"])
+        Assertions.assertEquals(100, applicationProperties.databaseProperties?.maxTableSize?.get("products"))
+        Assertions.assertEquals(100, applicationProperties.databaseProperties?.maxTableSize?.get("customers"))
+        Assertions.assertEquals(100, applicationProperties.databaseProperties?.maxTableSize?.get("categories"))
     }
 
     @Test
     fun testEmbeddedCollection() {
-        Assertions.assertEquals("default", applicationProperties.defaultRoles[0].id)
-        Assertions.assertEquals("Default Role", applicationProperties.defaultRoles[0].name)
-        Assertions.assertEquals("guest", applicationProperties.defaultRoles[1].id)
-        Assertions.assertEquals("Guest Role", applicationProperties.defaultRoles[1].name)
+        Assertions.assertEquals("default", applicationProperties.defaultRoles?.get(0)?.id)
+        Assertions.assertEquals("Default Role", applicationProperties.defaultRoles?.get(0)?.name)
+        Assertions.assertEquals("guest", applicationProperties.defaultRoles?.get(1)?.id)
+        Assertions.assertEquals("Guest Role", applicationProperties.defaultRoles?.get(1)?.name)
 
-        Assertions.assertEquals("admin", applicationProperties.roles["admin"]?.id)
-        Assertions.assertEquals("Admin Role", applicationProperties.roles["admin"]?.name)
-        Assertions.assertEquals("finance", applicationProperties.roles["finance"]?.id)
-        Assertions.assertEquals("Finance Role", applicationProperties.roles["finance"]?.name)
+        Assertions.assertEquals("admin", applicationProperties.roles?.get("admin")?.id)
+        Assertions.assertEquals("Admin Role", applicationProperties.roles?.get("admin")?.name)
+        Assertions.assertEquals("finance", applicationProperties.roles?.get("finance")?.id)
+        Assertions.assertEquals("Finance Role", applicationProperties.roles?.get("finance")?.name)
     }
 
     @Test
@@ -92,7 +92,6 @@ class ConfigurationPropertiesTest(
                 applicationConversionService.addConverter(stringToDateConverter)
                 return applicationConversionService
             }
-
         }
     }
 }

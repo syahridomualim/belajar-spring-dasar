@@ -11,11 +11,11 @@ data class ApplicationProperties @ConstructorBinding constructor(
     val name: String,
     val version: Int,
     val productionMode: Boolean,
-    val databaseProperties: DatabaseProperties,
-    val defaultTimeOut: Duration,
-    val expireDate: Date,
-    val defaultRoles: List<Role>,
-    val roles: Map<String, Role>
+    val databaseProperties: DatabaseProperties?,
+    val defaultTimeOut: Duration?,
+    val expireDate: Date?,
+    val defaultRoles: List<Role>?,
+    val roles: Map<String, Role>?
 ) {
     data class DatabaseProperties @ConstructorBinding constructor(
         val username: String,
