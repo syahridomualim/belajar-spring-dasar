@@ -6,7 +6,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 @Component
-class StringToDataConverter : Converter<String, Date> {
+class StringToDateConverter : Converter<String, Date> {
     override fun convert(source: String): Date? {
         return SimpleDateFormat("yyyy-MM-dd").parse(source)
     }

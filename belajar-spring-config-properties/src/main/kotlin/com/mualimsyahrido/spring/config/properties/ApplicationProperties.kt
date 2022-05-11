@@ -2,6 +2,8 @@ package com.mualimsyahrido.spring.config.properties
 
 import org.springframework.boot.context.properties.ConfigurationProperties
 import org.springframework.boot.context.properties.ConstructorBinding
+import java.time.Duration
+import java.util.*
 
 
 @ConfigurationProperties(prefix = "application")
@@ -10,6 +12,8 @@ data class ApplicationProperties @ConstructorBinding constructor(
     val version: Int,
     val productionMode: Boolean,
     val databaseProperties: DatabaseProperties,
+    val defaultTimeOut: Duration,
+    val expireDate: Date,
     val defaultRoles: List<Role>,
     val roles: Map<String, Role>
 ) {
@@ -26,4 +30,5 @@ data class ApplicationProperties @ConstructorBinding constructor(
         val id: String,
         val name: String
     )
+
 }

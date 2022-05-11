@@ -1,15 +1,25 @@
 package com.mualimsyahrido.spring.config.configurationproperties
 
+import com.mualimsyahrido.spring.config.converter.StringToDateConverter
 import com.mualimsyahrido.spring.config.properties.ApplicationProperties
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.context.properties.EnableConfigurationProperties
+import org.springframework.boot.convert.ApplicationConversionService
 import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.context.annotation.Bean
+import org.springframework.context.annotation.Import
+import org.springframework.core.convert.ConversionService
+import java.text.SimpleDateFormat
+import java.time.Duration
 
 @SpringBootTest(classes = [ConfigurationPropertiesTest.Companion.TestApplication::class])
-class ConfigurationPropertiesTest(@Autowired val applicationProperties: ApplicationProperties) {
+class ConfigurationPropertiesTest(
+    @Autowired val applicationProperties: ApplicationProperties,
+    @Autowired val conversionService: ConversionService
+) {
 
     @Test
     fun testConfigurationProperties() {
@@ -28,7 +38,10 @@ class ConfigurationPropertiesTest(@Autowired val applicationProperties: Applicat
 
     @Test
     fun testCollection() {
-        Assertions.assertEquals(listOf("customers", "products", "categories"), applicationProperties.databaseProperties.whiteListTables)
+        Assertions.assertEquals(
+            listOf("customers", "products", "categories"),
+            applicationProperties.databaseProperties.whiteListTables
+        )
         Assertions.assertEquals(100, applicationProperties.databaseProperties.maxTableSize["products"])
         Assertions.assertEquals(100, applicationProperties.databaseProperties.maxTableSize["customers"])
         Assertions.assertEquals(100, applicationProperties.databaseProperties.maxTableSize["categories"])
@@ -42,16 +55,44 @@ class ConfigurationPropertiesTest(@Autowired val applicationProperties: Applicat
         Assertions.assertEquals("Guest Role", applicationProperties.defaultRoles[1].name)
 
         Assertions.assertEquals("admin", applicationProperties.roles["admin"]?.id)
-        Assertions.assertEquals("Admin Role", applicationProperties.roles["Admin Role"]?.name)
+        Assertions.assertEquals("Admin Role", applicationProperties.roles["admin"]?.name)
         Assertions.assertEquals("finance", applicationProperties.roles["finance"]?.id)
-        Assertions.assertEquals("Finance Role", applicationProperties.roles["Finance Role"]?.name)
+        Assertions.assertEquals("Finance Role", applicationProperties.roles["finance"]?.name)
+    }
 
+    @Test
+    fun testDuration() {
+        Assertions.assertEquals(Duration.ofSeconds(10), applicationProperties.defaultTimeOut)
+    }
+
+    @Test
+    fun testCustomConverter() {
+        val expireDate = applicationProperties.expireDate
+
+        val dateFormat = SimpleDateFormat("yyyy-MM-dd")
+        Assertions.assertEquals("2022-05-10", dateFormat.format(expireDate))
+    }
+
+    @Test
+    fun testConversionService() {
+        Assertions.assertTrue(conversionService.canConvert(String::class.java, Duration::class.java))
+        val result = conversionService.convert("10s", Duration::class.java)
+        Assertions.assertEquals(Duration.ofSeconds(10), result)
     }
 
     companion object {
         @SpringBootApplication
         @EnableConfigurationProperties(value = [ApplicationProperties::class])
+        @Import(StringToDateConverter::class)
         class TestApplication {
+
+            @Bean
+            fun conversionService(stringToDateConverter: StringToDateConverter): ConversionService {
+                val applicationConversionService = ApplicationConversionService()
+                applicationConversionService.addConverter(stringToDateConverter)
+                return applicationConversionService
+            }
+
         }
     }
 }
